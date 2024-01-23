@@ -10,6 +10,6 @@
 - 无需太多繁琐的步骤
 - 众多内容
 
-[GitHub](https://github.com/Heachy/TestForDocs)
+[GitHub](https://github.com/Heachy/TestForDocsify)
 [开始阅读](#TestForDocs)
 
