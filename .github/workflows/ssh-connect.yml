@@ -33,6 +33,6 @@ jobs:
           username: root
           privateKey: ${{ secrets.PRIVATE_KEY}}
       - name: upadeCode
-        run: |
-        cd /www/wwwroot/heachy.com/TestForDocsify
-        git pull
+        run: | 
+          cd /www/wwwroot/heachy.com/TestForDocsify
+          git pull
