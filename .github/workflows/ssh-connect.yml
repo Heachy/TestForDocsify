@@ -32,10 +32,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: root
           privateKey: ${{ secrets.PRIVATE_KEY}}
-  upadeCode:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: pull repository
         run: | 
           cd /www/wwwroot/heachy.com/TestForDocsify
