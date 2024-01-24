@@ -25,12 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: | 
-          cd /www/wwwroot/heachy.com/TestForDocsify
-          git pull
+      - name: pull repository
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: ls -a
+          command: git pull
+          path: /www/wwwroot/heachy.com/TestForDocsify
           host: ${{ secrets.HOST }}
           username: root
           privateKey: ${{ secrets.PRIVATE_KEY}}
