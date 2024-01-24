@@ -29,7 +29,7 @@ jobs:
       	# ssh链接服务器
         uses: garygrossgarten/github-action-ssh@release
         with:
-        	# 参数配置以及执行的命令
+	# 参数配置以及执行的命令
           command: |
             cd /www/wwwroot/heachy.com/TestForDocsify
             git pull
