@@ -23,13 +23,10 @@ jobs:
     # 任务流程
     steps:
       # 检出仓库
-      - uses: actions/checkout@v3
-		# 拉取更新repository
+      - uses: actions/checkout@v3 # 拉取更新repository
       - name: pull repository
-      	# ssh链接服务器
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-	# 参数配置以及执行的命令
+        uses: garygrossgarten/github-action-ssh@release # ssh链接服务器
+        with: 	# 参数配置以及执行的命令
           command: |
             cd /www/wwwroot/heachy.com/TestForDocsify
             git pull
