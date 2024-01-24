@@ -143,7 +143,7 @@ public class Client1 {
 
 #### 7. 非阻塞模式
 
-![1688974780137](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1688974780137.png)
+![1688974780137](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1688974780137.png)
 
 就是开启服务之后把Blocking改为false
 
@@ -328,11 +328,11 @@ while(iterator.hasNext()){
 
 ##### 多线程处理
 
-![1689061920668](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689061920668.png)
+![1689061920668](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689061920668.png)
 
-![1689062066704](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689062066704.png)
+![1689062066704](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689062066704.png)
 
-![1689062092725](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689062092725.png)
+![1689062092725](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689062092725.png)
 
 有一个总的selector->boss，也可以说是分发器，对外接收所有的channel链接，但是将这些链接分配给其他线程worker。
 
@@ -362,7 +362,7 @@ Stream只支持阻塞API，Channel两者都支持
 
 ##### 零拷贝
 
-![1689065250987](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689065250987.png)
+![1689065250987](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689065250987.png)
 
 
 
@@ -460,31 +460,31 @@ StringDecoder就是将ByteBuf转换为字符串，与之相反的客户端就是
 
 客户端中的sync就是让线程阻塞，知道socket连接上，然后获得channel后进行数据传输。
 
-![1689141349797](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689141349797.png)
+![1689141349797](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689141349797.png)
 
 #### 组件
 
 ##### EventLoop
 
-![1689148778625](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689148778625.png)
+![1689148778625](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689148778625.png)
 
-![1689149507525](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689149507525.png)
+![1689149507525](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689149507525.png)
 
-![1689154989199](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689154989199.png)
+![1689154989199](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689154989199.png)
 
 如果有些业务代码处理事件较久，可以再开个线程专门处理这个业务，及再细分到一个EvenLoop中去。
 
 fireChannelRead(msg)让消息传递给下一个handler
 
-![1689156002314](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689156002314.png)
+![1689156002314](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689156002314.png)
 
 一个小源码剖析
 
 ##### Channel
 
-![1689156239157](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689156239157.png)
+![1689156239157](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689156239157.png)
 
-![1689174233167](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689174233167.png)
+![1689174233167](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689174233167.png)
 
 这边客户端获得链接是异步的，然后处理链接后的结果可以在主线程中等待，也可以规划到异步里，channelFuture感觉可以理解为未来的，之后获得的channel放在这里，要用再取。
 
@@ -492,7 +492,7 @@ operationComplete就是当链接成功后要做的事
 
 
 
-![1689221246993](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689221246993.png)
+![1689221246993](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689221246993.png)
 
 在处理连接关闭时，由于NIO关闭步骤是异步的，如果想在关闭后执行一些业务代码，要么同步等待，或者像上面一样去放到operationComplete里面去。
 
@@ -502,25 +502,25 @@ operationComplete就是当链接成功后要做的事
 
 概述
 
-![1689223146894](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689223146894.png)
+![1689223146894](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689223146894.png)
 
 两个future都是等任务结束后执行，promise是两个线程任务间传递信息的容器，可以主动设置isSuccess
 
-![1689223998540](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689223998540.png)
+![1689223998540](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689223998540.png)
 
 大差不差
 
-![1689224546657](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689224546657.png)
+![1689224546657](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689224546657.png)
 
 promise的基础使用
 
 ##### Handler&PipeLine
 
-![1689225275966](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689225275966.png)
+![1689225275966](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689225275966.png)
 
 在设置进入的处理器时，是按顺序的，出的是反着来，如果没有出的写操作，则不会触发出的处理器
 
-![1689235545397](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689235545397.png)
+![1689235545397](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689235545397.png)
 
 这两个可以模拟入栈出栈的操作。
 
@@ -544,11 +544,11 @@ buffer()里面可以设置初始长度和最大长度，byteBuf可以自适应�
 
 ByteBuf里有四个参数，一个是读指针，一个是写指针，一个是当前容量，一个是最大容量
 
-![1689240519467](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689240519467.png)
+![1689240519467](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689240519467.png)
 
  多种写入方法
 
-![1689242391347](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689242391347.png)
+![1689242391347](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689242391347.png)
 
 ByteBuf里面有个计数器，计数器初始化为1,0的时候无法使用，也有函数是让这个计数器加一的
 
@@ -556,11 +556,11 @@ ByteBuf里面有个计数器，计数器初始化为1,0的时候无法使用，�
 
 如果顺利走到head或者tail会自动处理ByteBuf，否则要手动释放
 
-![1689244184102](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689244184102.png)
+![1689244184102](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689244184102.png)
 
 并不是物理上的切片，而是创建两个buffer有对饮的读写指针，并指向同一块连续内存
 
-![1689244462200](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689244462200.png)
+![1689244462200](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689244462200.png)
 
 下面一更改，两个输出都变了，映射到同一个buffer上
 
@@ -568,15 +568,15 @@ ByteBuf里面有个计数器，计数器初始化为1,0的时候无法使用，�
 
  如果旧的buffer回收了，想要保存切片，可以用retain，使计数加一
 
-![1689245098319](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689245098319.png)
+![1689245098319](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689245098319.png)
 
 ​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 
-![1689252220302](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689252220302.png)
+![1689252220302](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689252220302.png)
 
 不用复制的将两个buffer拼接在一起，那个true参数，可以理解为是否拼接两个写指针的位置
 
-![1689252748471](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689252748471.png)
+![1689252748471](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689252748471.png)
 
 在handler中创建buffer是，最好这样子创建
 
@@ -584,15 +584,15 @@ ByteBuf里面有个计数器，计数器初始化为1,0的时候无法使用，�
 
 #### 黏包与半包
 
-![1689307334821](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689307334821.png)
+![1689307334821](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689307334821.png)
 
 可以用换行符作为分隔符来进行处理黏包半包，maxlength就是如果超出这个长度还没识别到分隔符，就会显示数据异常。
 
-![1689308964113](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689308964113.png)
+![1689308964113](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689308964113.png)
 
 帧解码器
 
-![1689308943882](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689308943882.png)
+![1689308943882](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689308943882.png)
 
 这四个参数：
 
@@ -606,31 +606,31 @@ ByteBuf里面有个计数器，计数器初始化为1,0的时候无法使用，�
 
 #### 自定义协议
 
-![1689322496272](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689322496272.png)
+![1689322496272](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689322496272.png)
 
 可以加一个字节凑够16个字节，2的4次方
 
-![1689328096474](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689328096474.png)
+![1689328096474](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689328096474.png)
 
 编码与解码的handler
 
-![1689328714978](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689328714978.png)
+![1689328714978](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689328714978.png)
 
 如果要用可以被多个线程共用的处理器的话，可以继承这个父类，然后就可以加Sharable注解
 
 #### 实际业务
 
-![1689391152213](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689391152213.png)
+![1689391152213](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689391152213.png)
 
  经过message解码后，可以通过`SimpleChannelInboundHandler`去点名操作那个类，这边就点名要login的消息
 
 然后再根据实际需要去写业务代码
 
-![1689410511839](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689410511839.png)
+![1689410511839](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689410511839.png)
 
 可以将handler给提取出来，这边是处理断开链接的，记得清空SessionFactory里面的channel
 
-![1689411241627](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689411241627.png)
+![1689411241627](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689411241627.png)
 
 `IDLEStateHandler`检测空闲的，第一个参数是检测读空闲多久，第二个是检测写空闲多久，第三个是检测都什么都没干多久
 
@@ -644,7 +644,7 @@ ByteBuf里面有个计数器，计数器初始化为1,0的时候无法使用，�
 
 协议要做好配置
 
-![1689475761428](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689475761428.png)
+![1689475761428](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689475761428.png)
 
 通过option去配置channel
 
@@ -656,13 +656,13 @@ ByteBuf里面有个计数器，计数器初始化为1,0的时候无法使用，�
 
 SO_BACKLOG
 
-![1689477584903](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689477584903.png)
+![1689477584903](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689477584903.png)
 
-当进行完TCP三次握手之后，并不会立马accept，因为服务器处理有限，不一定会立马处理，所以先放到一个队列中等待处理。![1689477701711](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689477701711.png)
+当进行完TCP三次握手之后，并不会立马accept，因为服务器处理有限，不一定会立马处理，所以先放到一个队列中等待处理。![1689477701711](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689477701711.png)
 
 在找初始值时，可以用ctrl+alt+B找到finduse，然后顺着找到赋值链
 
-![1689478303016](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689478303016.png)
+![1689478303016](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689478303016.png)
 
 第三个是一个进程最大能打开的文件数量
 
@@ -670,7 +670,7 @@ SO_BACKLOG
 
 第五个是缓冲区的大小设置
 
-![1689479047700](D:\Desktop\java学习\1689479047700.png)
+![1689479047700](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689479047700.png)
 
 根据这个来改变获得的buffer是否池化，堆内存还是直接内存
 
@@ -680,7 +680,7 @@ SO_BACKLOG
 
 #### 源码分析
 
-![1689583829570](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689583829570.png)
+![1689583829570](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689583829570.png)
 
-![1689583798659](C:\Users\86189\AppData\Roaming\Typora\typora-user-images\1689583798659.png)
+![1689583798659](https://bucketofpicture.oss-cn-hangzhou.aliyuncs.com/picgo1689583798659.png)
 
