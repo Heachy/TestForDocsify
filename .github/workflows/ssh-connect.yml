@@ -1,33 +1,35 @@
-# This is a basic workflow to help you get started with Actions
+# 链接服务器并执行命令的workflow
 
 name: SSH-Connect
+run-name: update the repository of server
 
-# Controls when the workflow will run
+# 当有push和pr在main分支时，执行
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # 允许手动执行
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# 工作流
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  # 任务名
+  update-server:
+    # 需要的运行环境
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    # 任务流程
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # 检出仓库
       - uses: actions/checkout@v3
-
+		# 拉取更新repository
       - name: pull repository
+      	# ssh链接服务器
         uses: garygrossgarten/github-action-ssh@release
         with:
+        	# 参数配置以及执行的命令
           command: |
             cd /www/wwwroot/heachy.com/TestForDocsify
             git pull
