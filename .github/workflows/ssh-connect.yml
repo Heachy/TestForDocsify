@@ -28,7 +28,7 @@ jobs:
       - name: pull repository
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: git pull
+          command: ls
           path: /www/wwwroot/heachy.com/TestForDocsify
           host: ${{ secrets.HOST }}
           username: root
