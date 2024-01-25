@@ -90,7 +90,7 @@ jobs:              # 当事件触发时执行的工作内容
 
 > step里步骤要加注释的话只能在行末注释，不可换行注释
 
-```shell
+```yaml
 # 链接服务器并执行命令的workflow
 
 name: SSH-Connect
@@ -172,7 +172,7 @@ jobs:
 
 2. 在终端中运行以下命令：
 
-   ```shell
+   ```sh
    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
    ```
 

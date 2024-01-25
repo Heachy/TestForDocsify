@@ -28,7 +28,7 @@
         '/.*/_navbar.md': '/_navbar.md'
       },
       // 侧边栏标题深度
-      subMaxLevel: 3,
+      subMaxLevel: 2,
       // 是否开启导航栏
       loadNavbar: true,
       // 搜索配置
@@ -39,10 +39,30 @@
         maxAge: 300000, // 过期时间，单位毫秒，默认一天
         depth: 3
       },
+      // 跳转后自动到顶部
+      auto2top: true,
+
+      // 页面右侧toc
+      toc: {
+        tocMaxLevel: 3,
+        target: "h2, h3, h4, h5, h6",
+      },
 
       // 封面配置
       coverpage: true,
+
+      onlyCover: false,
+
+      // 自动添加标题
       autoHeader: true,
+
+      // 底部导航
+      pagination: {
+        previousText: "上一页",
+        nextText: "下一页",
+        crossChapter: true,
+        crossChapterText: true,
+      },
 
       // 复制代码配置
       copyCode: {
@@ -57,6 +77,7 @@
   <!-- 搜索插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
 
+
   <!-- 添加代码高亮的配置  -->
   <!-- 需要什么语言的高亮就改下对应的名称即可 -->
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
@@ -67,6 +88,22 @@
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-verilog.min.js"></script>
   <!-- 添加一键拷贝代码的配置 -->
   <script src="//unpkg.com/docsify-copy-code"></script>
+
+  <!-- 底部 上一页下一页 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/external-script.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/ga.min.js"></script>
+
+  <!-- 页面右侧 TOC -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-plugin-toc@1.1.0/dist/docsify-plugin-toc.min.js"></script>
+
+  <!-- 多tab支持 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1/dist/docsify-tabs.min.js"></script>
+
+  <!-- 图片放大缩小 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
 </body>
 
 </html>
