@@ -4,7 +4,6 @@ inputs:
     msg_a:
         description: 'this is msgA'
         require: true
-        default: 'msgA'
     msg_b:
         description: 'this is msgB'
         require: false
