@@ -1,23 +1,24 @@
 name: Test-Input-Ouput-Use-Orther-Action
 run-name: just one test of the mean that the name
 
-inputs:
-    msg_a:
-        description: 'this is msgA'
-        require: true
-        default: 'msgA'
-    msg_b:
-        description: 'this is msgB'
-        require: false
-        default: 'msgB'
-
-outputs:
-    result_a: 
-        description: 'this is resultA'
-        value: 'resultA'
-    result_b: 
-        description: 'this is resultB'
-        value: 'resultB'
+on:
+    workflow_call:
+        inputs:
+            msg_a:
+                description: 'this is msgA'
+                require: true
+                default: 'msgA'
+            msg_b:
+                description: 'this is msgB'
+                require: false
+                default: 'msgB'
+        outputs:
+            result_a: 
+                description: 'this is resultA'
+                value: 'resultA'
+            result_b: 
+                description: 'this is resultB'
+                value: 'resultB'
     
 jobs:
     say_hello:
