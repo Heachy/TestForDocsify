@@ -24,7 +24,7 @@ jobs:
     say_hello:
         runs-on: ubuntu-latest
         outputs:
-            result_a: steps.hello.outputs.result_a
+            result_a: ${{steps.hello.outputs.result_a}}
         steps:
         - name: say_hello
           id: hello
