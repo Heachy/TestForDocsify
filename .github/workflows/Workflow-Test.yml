@@ -15,7 +15,7 @@ on:
         outputs:
             result_a: 
                 description: 'this is resultA'
-                value: '${{ jobs.say_hello.steps.hello.result_a }}'
+                value: '${{ jobs.say_hello.outputs.result_a }}'
             result_b: 
                 description: 'this is resultB'
                 value: 'resultB'
@@ -23,6 +23,8 @@ on:
 jobs:
     say_hello:
         runs-on: ubuntu-latest
+        outputs:
+            result_a: steps.hello.outputs.result_a
         steps:
         - name: say_hello
           id: hello
