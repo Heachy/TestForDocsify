@@ -15,7 +15,7 @@ on:
         outputs:
             result_a: 
                 description: 'this is resultA'
-                value: 'resultxxA'
+                value: '${{ jobs.say_hello.steps.hello.result_a }}'
             result_b: 
                 description: 'this is resultB'
                 value: 'resultB'
