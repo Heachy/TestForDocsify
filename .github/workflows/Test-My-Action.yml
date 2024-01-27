@@ -11,7 +11,7 @@ on:
 
 jobs:
   test-my-action:
-    uses: ./.github/workflows/action.yml
+    uses: ./.github/workflows/Workflow-Test.yml
     with: 
       msg_a: 'hello'
       msg_b: 'world'
