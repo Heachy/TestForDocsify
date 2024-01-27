@@ -15,7 +15,7 @@ on:
         outputs:
             result_a: 
                 description: 'this is resultA'
-                value: 'resultA'
+                value: 'resultxxA'
             result_b: 
                 description: 'this is resultB'
                 value: 'resultB'
