@@ -1,0 +1,27 @@
+name: Test the action of my created in the repository
+
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  test_my_action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: use my action
+        id: my-action
+        uses: Heachy/TestForDocsify@v1.0.2
+        with: 
+          msg_a: 'hello'
+      - name: use the outputs
+        run: |
+          echo "The resultA is ${{ steps.my-action.outputs.result_a }}"
+          echo "The resultA is ${{ steps.my-action.outputs.result_b }}"
+      - name: The End
+        run: echo Hello,My Action!
