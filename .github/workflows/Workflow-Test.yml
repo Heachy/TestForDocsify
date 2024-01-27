@@ -28,7 +28,7 @@ jobs:
           id: hello
           run: |
             echo "hello msgA:${{ inputs.msg_a }}"
-            echo "::set-output name=result_a::${{ inputs.msg_a+'resultA' }}"
+            echo "::set-output name=result_a::${{ inputs.msg_a }}+'resultA'"
           
         - name: say_world
           id: world
