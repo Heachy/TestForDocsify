@@ -10,20 +10,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  test_my_action:
+  test-my-action:
+    uses: ./.github/workflows/action.yml
+    with: 
+      msg_a: 'hello'
+      msg_b: 'world'
+  print-something:
     runs-on: ubuntu-latest
+    needs: test-my-action
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: use my action
-        id: my-action
-        uses: ./
-        with: 
-          msg_a: 'hello'
-          msg_b: 'world'
       - name: use the outputs
         run: |
-          echo "The resultA is ${{ steps.my-action.outputs.result_a }}"
-          echo "The resultA is ${{ steps.my-action.outputs.result_b }}"
+          echo "The resultA is ${{ needs.test-my-action.outputs.result_a }}"
+          echo "The resultA is ${{ needs.test-my-action.outputs.result_b }}"
       - name: The End
         run: echo Hello,My Action!
