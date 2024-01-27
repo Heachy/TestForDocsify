@@ -31,5 +31,5 @@ runs:
               INPUT_MSG_B: ${{ inputs.msg_b }}
     
 branding:
-  icon: 'slack'
+  icon: 'book-open'
   color: 'blue'
