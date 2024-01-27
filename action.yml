@@ -12,8 +12,12 @@ inputs:
         default: 'msgB'
 
 outputs:
-    result_a: 'resultA'
-    result_b: 'resultB'
+    result_a: 
+        description: 'this is resultA'
+        value: 'resultA'
+    result_b: 
+        description: 'this is resultB'
+        value: 'resultB'
     
 jobs:
     say_hello:
@@ -22,9 +26,9 @@ jobs:
         - name: say_hello
           id: hello
           run: |
-            echo "hello msgA:${{inputs.msg_a}}"
-            echo "::set-output name=result_a::${{msg_a+'resultA'}}"
+            echo "hello msgA:${{ inputs.msg_a }}"
+            echo "::set-output name=result_a::${{ inputs.msg_a+'resultA' }}"
           
         - name: say_world
           id: world
-          run: echo "hello msgB:${{inputs.msg_b}}"
+          run: echo "hello msgB:${{ inputs.msg_b }}"
