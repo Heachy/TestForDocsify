@@ -28,7 +28,7 @@ jobs:
           id: hello
           run: |
             echo "hello msgA:${{ inputs.msg_a }}"
-            echo "{result_a}={${{ inputs.msg_a }}}" >> $GITHUB_OUTPUT
+            echo "result_a=${{ inputs.msg_a }}" >> $GITHUB_OUTPUT
           
         - name: say_world
           id: world
