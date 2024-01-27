@@ -23,7 +23,7 @@ jobs:
         - name: say_hello
           id: hello
           run: |
-            echo "hello msgA:}"
+            echo "hello msgA:"
             echo "::set-output name=result_a::tulea"
           
         - name: say_world
