@@ -20,13 +20,13 @@ jobs:
     say_hello:
         steps:
         - name: say_hello
-          shell: bash
-          id: hello
-          run: |
-            echo "hello msgA:${{ inputs.msg_a }}"
-            echo "::set-output name=result_a::${{ inputs.msg_a+'resultA' }}"
+            shell: bash
+            id: hello
+            run: |
+                echo "hello msgA:${{ inputs.msg_a }}"
+                echo "::set-output name=result_a::${{ inputs.msg_a+'resultA' }}"
           
         - name: say_world
-          shell: bash
-          id: world
-          run: echo "hello msgB:${{ inputs.msg_b }}"
+            shell: bash
+            id: world
+            run: echo "hello msgB:${{ inputs.msg_b }}"
