@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: use my action
         id: my-action
-        uses: Heachy/TestForDocsify@v1.0.2
+        uses: Heachy/TestForDocsify@main
         with: 
           msg_a: 'hello'
       - name: use the outputs
