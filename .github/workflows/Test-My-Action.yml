@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: use my action
-        id: my-action
-        uses: Heachy/TestForDocsify@main
-        with: 
-          msg_a: 'hello'
-      - name: use the outputs
-        run: |
-          echo "The resultA is ${{ steps.my-action.outputs.result_a }}"
-          echo "The resultA is ${{ steps.my-action.outputs.result_b }}"
+      # - name: use my action
+      #   id: my-action
+      #   uses: Heachy/TestForDocsify@main
+      #   with: 
+      #     msg_a: 'hello'
+      # - name: use the outputs
+      #   run: |
+      #     echo "The resultA is ${{ steps.my-action.outputs.result_a }}"
+      #     echo "The resultA is ${{ steps.my-action.outputs.result_b }}"
       - name: The End
         run: echo Hello,My Action!
