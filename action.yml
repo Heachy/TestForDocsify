@@ -1,24 +1,21 @@
 name: Test-Input-Ouput-Use-Orther-Action
 run-name: just one test of the mean that the name
-
-on:
-    workflow_call:
-        inputs:
-            msg_a:
-                description: 'this is msgA'
-                require: true
-                default: 'msgA'
-            msg_b:
-                description: 'this is msgB'
-                require: false
-                default: 'msgB'
-        outputs:
-            result_a: 
-                description: 'this is resultA'
-                value: 'resultA'
-            result_b: 
-                description: 'this is resultB'
-                value: 'resultB'
+inputs:
+    msg_a:
+        description: 'this is msgA'
+        require: true
+        default: 'msgA'
+    msg_b:
+        description: 'this is msgB'
+        require: false
+        default: 'msgB'
+outputs:
+    result_a: 
+        description: 'this is resultA'
+        value: 'resultA'
+    result_b: 
+        description: 'this is resultB'
+        value: 'resultB'
     
 jobs:
     say_hello:
@@ -27,9 +24,9 @@ jobs:
         - name: say_hello
           id: hello
           run: |
-            echo "hello msgA:${{ inputs.msg_a }}"
-            echo "::set-output name=result_a::${{ inputs.msg_a+'resultA' }}"
+            echo "hello msgA:${{ github.event.inputs.msg_a }}"
+            echo "::set-output name=result_a::${{ github.event.inputs.msg_a+'resultA' }}"
           
         - name: say_world
           id: world
-          run: echo "hello msgB:${{ inputs.msg_b }}"
+          run: echo "hello msgB:${{ github.event.inputs.msg_b }}"
