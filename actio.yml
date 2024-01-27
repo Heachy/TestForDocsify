@@ -1,15 +1,6 @@
 name: Test-Input-Ouput-Use-Orther-Action
 run-name: just one test of the mean that the name
 
-
-on:
-    push:
-        branches: 
-            - main
-    pull_request: 
-        branches: 
-            - main
-
 inputs:
     msg_a:
         description: 'this is msgA'
