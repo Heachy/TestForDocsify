@@ -1,34 +1,35 @@
 name: Test-Input-Ouput-Use-Orther-Action
-run-name: just one test of the mean that the name
 
-on:
-    workflow_call:
-        inputs:
-            msg_a:
-                description: 'this is msgA'
-                require: true
-            msg_b:
-                description: 'this is msgB'
-                require: false
-                default: 'msgB'
-        outputs:
-            result_a: 
-                description: 'this is resultA'
-                value: 'resultA'
-            result_b: 
-                description: 'this is resultB'
-                value: 'resultB'
+author: Heachy
+
+description: One test for creating action into market. Input some args and return something
+
+
+inputs:
+    msg_a:
+        description: 'this is msgA'
+        require: true
+    msg_b:
+        description: 'this is msgB'
+        require: false
+        default: 'msgB'
+outputs:
+    result_a: 
+        description: 'this is resultA'
+        value: 'resultA'
+    result_b: 
+        description: 'this is resultB'
+        value: 'resultB'
+runs:
+    using: "composite"
+    steps:
+        - name: Run script
+          shell: bash
+          run: $GITHUB_ACTION_PATH/script.sh
+          env:
+              INPUT_MSG_A: ${{ inputs.msg_a }}
+              INPUT_MSG_B: ${{ inputs.msg_b }}
     
-jobs:
-    say_hello:
-        runs-on: ubuntu-latest
-        steps:
-        - name: say_hello
-          id: hello
-          run: |
-            echo "hello msgA:${{ inputs.msg_a }}"
-            echo "::set-output name=result_a::${{ inputs.msg_a+'resultA' }}"
-          
-        - name: say_world
-          id: world
-          run: echo "hello msgB:${{ inputs.msg_b }}"
+branding:
+  icon: 'slack'
+  color: 'blue'
