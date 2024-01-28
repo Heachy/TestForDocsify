@@ -20,9 +20,12 @@ jobs:
       - name: use the action
         id: use-action
         uses: ./
+        with:
+          msg_a: hello
+          msg_b: world
       - name: use the outputs
         run: |
           echo "The resultA is ${{ steps.use-action.outputs.result_a }}"
-          echo "The resultA is ${{ steps.use-action.outputs.result_b }}"
+          echo "The resultB is ${{ steps.use-action.outputs.result_b }}"
       - name: The End
         run: echo Hello,My Action!
