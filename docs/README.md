@@ -143,6 +143,12 @@ jobs:
 
 [触发事件详细链接](https://docs.github.com/zh/actions/using-workflows/events-that-trigger-workflows)
 
+[函数表达式等详细链接](https://docs.github.com/zh/actions/learn-github-actions/expressions)
+
+[图标链接](https://feathericons.com/)
+
+[发布action到市场教程](https://blog.csdn.net/sculpta/article/details/113737409)
+
 #### args
 
 在 GitHub Actions 中，`jobs.<job_id>.steps[*].with.args` 中的 `args` 是用于指定执行步骤时传递给 Action 或脚本的参数。这通常用于定制步骤的行为或将特定的参数传递给脚本或命令。
@@ -504,6 +510,122 @@ Bash 是一种流行的 Unix shell，它提供了在命令行上执行命令和�
 
 在你提供的工作流配置中，通过设置 `shell: bash`，指定了在该作业中使用 Bash 作为 shell。这意味着在 `./scripts` 目录下的脚本或命令将由 Bash 解释和执行。
 
+### 可重用工作流的使用
+
+> 下面这个是可重用工作流的写法
+>
+> 一定要加on：
+>
+> ​						workflow_call
+>
+> 这个文件一定要放在.github/workflows目录下
+
+```yaml
+name: Test-Input-Ouput-Use-Orther-Action
+run-name: just one test of the mean that the name
+on:
+    workflow_call:
+        inputs:
+            msg_a:
+                description: 'this is msgA'
+                type: string
+                required: true
+            msg_b:
+                description: 'this is msgB'
+                required: false
+                type: string
+                default: 'msgB'
+        outputs:
+            result_a: 
+                description: 'this is resultA'
+                # 输出设置
+                value: '${{ jobs.say_hello.outputs.result_a }}'
+            result_b: 
+                description: 'this is resultB'
+                value: 'resultB'
+    
+jobs:
+    say_hello:
+        runs-on: ubuntu-latest
+        # 配合最外层输出设置
+        outputs:
+            result_a: ${{steps.hello.outputs.result_a}}
+        steps:
+        - name: say_hello
+          id: hello
+          run: |
+            echo "hello msgA:${{ inputs.msg_a }}"
+            echo "result_a=${{ format('Jose {0} ', inputs.msg_a) }}" >> $GITHUB_OUTPUT
+          # 配合表达式使用
+        - name: say_world
+          id: world
+          run: echo "hello msgB:${{ inputs.msg_b }}"
+```
+
+> 下面这个是使用可重复工作流的代码
+>
+> 只能放在一个job下，不能用于step中
+>
+> 使用uses需要完整路径
+
+```yaml
+name: Test the action of my created in the repository
+
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  test-my-action:
+    uses: ./.github/workflows/Workflow-Test.yml
+    with: 
+      msg_a: 'hello'
+      msg_b: 'world'
+  print-something:
+    runs-on: ubuntu-latest
+    needs: test-my-action
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: use the outputs
+        run: |
+          echo "The resultA is ${{ needs.test-my-action.outputs.result_a }}"
+          echo "The resultA is ${{ needs.test-my-action.outputs.result_b }}"
+      - name: The End
+        run: echo Hello,My Action!
+```
+
+#### set-out&save-states
+
+已弃用，用第二种
+
+`save-state`使用或`set-output`类似以下内容的工作流程
+
+```yaml
+- name: Save state
+run: echo "::save-state name={name}::{value}"
+
+- name: Set output
+run: echo "::set-output name={name}::{value}"
+```
+
+应更新以写入新的`GITHUB_STATE`环境`GITHUB_OUTPUT`文件：
+
+```yaml
+- name: Save state
+run: echo "{name}={value}" >> $GITHUB_STATE
+
+- name: Set output
+run: echo "{name}={value}" >> $GITHUB_OUTPUT
+```
+
+
+
 ## Environment & Repository secrets 
 
 ```yml
@@ -537,8 +659,6 @@ jobs:
         run: "NODE_ENV=${{ env.NODE_ENV }} npm run build"
 ```
 
-
-
 ## SSH秘钥
 
 生成 SSH 密钥对通常可以使用 `ssh-keygen` 工具。以下是在 Unix/Linux 或 macOS 系统上生成 SSH 密钥对的简单步骤：
@@ -567,3 +687,71 @@ jobs:
 **注意：** 在生成 SSH 密钥对时，请确保私钥的保密性。私钥泄露可能导致未经授权的访问。
 
 > 执行完后记得执行一句‘cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys’,(不知道要不要哈哈)
+
+## 在 Shell 中显示色彩
+
+echo 命令，中文叫作“回声”，echo 还有另一面，那就是它色彩斑斓的一面。耳听为虚，眼见为实，我们先来看一个示例，如图 1 所示。
+
+![img](E:/java/git/project/TestForDocsify/docs/README.assets/3-1P926164009458.jpg)
+图1
+
+看到了吧，echo 命令输出了红底青字，大家也看到了 echo 的另一面。原理其实并不难，echo 是通过使用“转义序列”来为世界涂上颜色的。语法格式如下：
+
+```shell
+echo -e "\033[颜色1;颜色2m 要展示的文字 \033[0m"
+```
+
+格式详解：
+
+- -e选项：表示允许反斜杠（对字符）转义。
+- \033[颜色1；颜色2m：称为转义序列，它本身是一个整体，中间不要有空格。
+- \033[：转义序列的开始。其中\033代表Esc符号，也可以使用\E或\e来代替。
+- 颜色1和颜色2：表示字体的前景色或背景色，至于颜色1和颜色2哪一个表示前景色，哪一个表示背景色，由其设定的数值来决定，前景色和背景色的数值空间是不同的。
+- m：转义序列的终止标志。
+- \033[0m：表示将颜色恢复回原来的配色。
+
+好了，了解完原理，我们再来详细看一下上面的示例，如图 2 所示。
+
+
+
+![img](E:/java/git/project/TestForDocsify/docs/README.assets/3-1P926164539348.jpg)
+图2
+
+图 2 中所有涉及的颜色如表 3 所示。
+
+| 色彩   | 黑   | 红   | 绿   | 黄   | 蓝   | 洋红 | 青   | 白   |
+| ------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 前景色 | 30   | 31   | 32   | 33   | 34   | 35   | 36   | 37   |
+| 背景色 | 40   | 41   | 42   | 43   | 44   | 45   | 46   | 47   |
+
+### 在脚本中显示色彩
+
+脚本中使用 echo 显示色彩的方法有两种：
+
+1. 在 Shell 脚本中事先定义好“颜色变量”，然后使用 echo-e 来调用变量显示颜色。
+2. 在 Shell 脚本中事先定义好“颜色动作”，然后直接调用动作来输出变量。
+
+我们通过两个示例来为大家展示什么是颜色变量，什么又是颜色动作。
+
+第一种方法：定义颜色变量
+
+```shell
+#!/bin/bash
+# 定义颜色变量, 还记得吧, \033、\e和\E是等价的
+RED='\E[1;31m'       # 红
+GREEN='\E[1;32m'    # 绿
+YELOW='\E[1;33m'    # 黄
+BLUE='\E[1;34m'     # 蓝
+PINK='\E[1;35m'     # 粉红
+RES='\E[0m'          # 清除颜色
+ 
+ 
+# 真正使用时, 我们通过echo -e来调用
+echo -e  "${RED}Red color${RES}"
+echo -e  "${YELOW}Yelow color${RES}"
+echo -e  "${BLUE}Blue color${RES}"
+echo -e  "${GREEN}Green color${RES}"
+echo -e  "${PINK}Pink color${RES}"
+```
+
+这种方法的原理是，把转义序列定义为变量，echo 时直接引用变量就行了。
