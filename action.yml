@@ -25,7 +25,7 @@ runs:
     steps:
         - name: Run script
           shell: bash
-          run: ./script.sh
+          run: ${{GITHUB_ACTION_PATH}}/script.sh
           env:
               INPUT_MSG_A: ${{ inputs.msg_a }}
               INPUT_MSG_B: ${{ inputs.msg_b }}
