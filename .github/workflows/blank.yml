@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
       - name: use the action
         id: use-action
-        uses: Heachy/TestForDocsify@main
+        uses: Heachy/TestForDocsify@1.0.3
         with:
           msg_a: hello
           msg_b: world
