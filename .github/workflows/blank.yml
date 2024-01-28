@@ -1,0 +1,28 @@
+name: Test the action
+
+run-name: Test the action that my create in the marcket
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  test-print-something:
+    name: test the action in marcket
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: use the action
+        id: use-action
+        uses: ./
+      - name: use the outputs
+        run: |
+          echo "The resultA is ${{ steps.use-action.outputs.result_a }}"
+          echo "The resultA is ${{ steps.use-action.outputs.result_b }}"
+      - name: The End
+        run: echo Hello,My Action!
