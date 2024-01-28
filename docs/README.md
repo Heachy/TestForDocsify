@@ -624,6 +624,126 @@ run: echo "{name}={value}" >> $GITHUB_STATE
 run: echo "{name}={value}" >> $GITHUB_OUTPUT
 ```
 
+#### 发布到market的使用
+
+[推荐博客](https://blog.csdn.net/sculpta/article/details/113737409)
+
+> 下面是与上面的可重用工作流实现的差不多功能的action
+
+- action.yml
+
+```yaml
+# 名称
+name: Test-Input-Ouput-Use-Orther-Action
+
+# 作者
+author: Heachy
+
+# action描述
+description: One test for creating action into market. Input some args and return something
+
+# 需要输入的参数
+inputs:
+    msg_a:
+        description: 'this is msgA'
+        require: true
+    msg_b:
+        description: 'this is msgB'
+        require: false
+        default: 'msgB'
+# 输出的内容
+outputs:
+    result_a: 
+        description: 'this is resultA'
+        value: 'resultA'
+    result_b: 
+        description: 'this is resultB'
+        value: 'resultB'
+# 运行  这里是使用脚本的方法，其余见官方文档
+runs:
+    using: "composite"
+    steps:
+        - name: Run script
+          shell: bash
+          run: ${{env.GITHUB_ACTION_PATH}}./script.sh
+          env:
+              INPUT_MSG_A: ${{ inputs.msg_a }}
+              INPUT_MSG_B: ${{ inputs.msg_b }}
+              
+# 发布到market的logo和颜色
+branding:
+  icon: 'book-open'
+  color: 'blue'
+
+```
+
+- script.sh
+- 如果在windows上编写完脚本的话，需要运行`git update-index --chmod=+x ./script.sh`去设置权限，否则会提示没有permission
+
+```shell
+#!/bin/bash
+
+red='\e[91m'
+green='\e[92m'
+cyan='\e[96m'
+none='\e[0m'
+
+#! -z是判断是否为空
+if [[ -z $INPUT_MSG_A ]]; then
+  echo -e "${red}ERROR: the INPUT_MSG_A field is required${none}" >&2
+  exit 1
+else
+  echo -e "${cyan}Having input the INPUT_MSG_A: ${INPUT_MSG_A}"
+fi
+
+#! -n是判断是否不为空
+if [[ -n $INPUT_MSG_B ]]; then
+
+  echo -e "${cyan}Having input the INPUT_MSG_B: ${INPUT_MSG_B}"
+else
+  echo -e "${red}ERROR: the INPUT_MSG_B field is required${none}" >&2
+  exit 1
+fi
+#! fi是if的结束语，类似大括号的}；
+```
+
+- Test-Action
+
+```yaml
+name: Test the action
+
+run-name: Test the action that my create in the marcket
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  test-print-something:
+    name: test the action in marcket
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: use the action
+        id: use-action
+        uses: Heachy/TestForDocsify@main
+        with:
+          msg_a: hello
+          msg_b: world
+      - name: use the outputs
+        run: |
+          echo "The resultA is ${{ steps.use-action.outputs.result_a }}"
+          echo "The resultB is ${{ steps.use-action.outputs.result_b }}"
+      - name: The End
+        run: echo Hello,My Action!
+
+```
+
 
 
 ## Environment & Repository secrets 
