@@ -10,7 +10,7 @@
 - 可以先将md文件里的本地图片通过picgo上传后再push
 
 - 在格式->图像->上传全部本地图片3
-- 测试action ing  1  2   3  4
+- 测试action ing  1  2   3  4  5
 
 ## Action的使用
 
