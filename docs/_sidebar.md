@@ -5,6 +5,7 @@
 - [page2](page2/)
   - [文件操作与IO流](page2/文件操作与IO流.md)
   - [消息队列RabbitMQ](page2/消息队列RabbitMQ.md)
+  - [mybatis-plus](page2/mybatis-plus.md)
 - [docsify&action](docsify&action/)
   - [记录](docsify&action/记录.md)
 - [guide](guide.md)
